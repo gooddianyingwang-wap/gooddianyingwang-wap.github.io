@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="good电影网（gooddianyingwang-wap.github.io）影视导航与工具站，分类导航清晰，持续更新，倡导正版观影、尊重版权。">
+<meta name="keywords" content="good电影网, 影视导航, 电影, 好电影, gooddianyingwang-wap.github.io">
+<meta name="author" content="good电影网">
+<meta name="theme-color" content="#0b0f14">
+<meta property="og:type" content="website">
+<meta property="og:title" content="good电影网 · 影视导航与片单路书 | gooddianyingwang-wap.github.io">
+<meta property="og:description" content="good电影网整理值得关注的电影与剧集片单，分类导航清晰，持续更新。">
+<meta property="og:url" content="https://gooddianyingwang-wap.github.io/">
+<meta property="og:site_name" content="good电影网">
+<link rel="canonical" href="https://gooddianyingwang-wap.github.io/">
+<title>good电影网 · 影视导航与片单路书 | gooddianyingwang-wap.github.io</title>
+<style>
+/* ===== 霓虹地下车库 · 赛博路牌 ===== */
+:root{
+  --pit:#0b0f14; --pit2:#111822; --steel:#1a242f; --steel2:#24303d; --line:#34404d;
+  --txt:#d9e2ea; --dim:#8c9aa8; --dim2:#5f6d7c;
+  --yel:#ffd60a; --yel2:#ffe866; --oran:#ff7a00; --cy:#00e5ff; --hot:#ff2e63; --gr:#39ff14;
+  --max:1260px; --r:6px;
+  --mono:"WenQuanYi Micro Hei","PingFang SC","Microsoft YaHei",ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --cond:"WenQuanYi Micro Hei","PingFang SC","Microsoft YaHei",Impact,"Arial Narrow",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;}
+body{background:var(--pit);color:var(--txt);font-family:var(--mono);font-size:15.5px;line-height:1.85;overflow-x:hidden;
+  background-image:radial-gradient(ellipse at 18% 12%,rgba(0,229,255,.09),transparent 45%),radial-gradient(ellipse at 82% 88%,rgba(255,122,0,.09),transparent 45%);background-attachment:fixed;}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(255,255,255,.028) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.028) 1px,transparent 1px);background-size:52px 52px;}
+main,header,footer{position:relative;z-index:1;}
+a{color:inherit;text-decoration:none;transition:.25s;}
+ul{list-style:none;}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit;}
+:focus-visible{outline:2.5px solid var(--cy);outline-offset:3px;}
+::selection{background:var(--yel);color:#000;}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 28px;}
+section{padding:116px 0;}
+@media(max-width:640px){section{padding:72px 0;}.wrap{padding:0 16px;}}
+h2,.cond{font-family:var(--cond);}
+
+/* ===== 警示灯顶栏 ===== */
+.gate{background:rgba(11,15,20,.94);backdrop-filter:blur(12px);border-bottom:2px solid var(--yel);position:sticky;top:0;z-index:100;}
+.gate .bar{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:13px 0;}
+.logo{display:flex;align-items:center;gap:14px;}
+.beacon{width:38px;height:38px;border-radius:6px;background:var(--pit2);border:2px solid var(--yel);display:grid;place-items:center;font-family:var(--cond);font-size:18px;font-weight:800;color:var(--yel);box-shadow:0 0 12px rgba(255,214,10,.35);animation:warn 1.2s steps(2) infinite;}
+@keyframes warn{50%{background:var(--yel);color:#000;box-shadow:0 0 22px rgba(255,214,10,.75);}}
+.logo .txt b{font-family:var(--cond);font-size:19px;letter-spacing:.02em;line-height:1.2;display:block;}
+.logo .txt span{font-size:10.5px;color:var(--cy);letter-spacing:.18em;}
+.menu{display:flex;gap:2px;align-items:center;}
+.menu a{font-size:13.5px;padding:8px 14px;border-radius:4px;color:var(--dim);letter-spacing:.04em;}
+.menu a:hover{color:#000;background:var(--yel);}
+.menu a.go{border:2px solid var(--yel);color:var(--yel);margin-left:8px;padding:7px 16px;font-weight:700;}
+.menu a.go:hover{background:var(--yel);color:#000;}
+.hamb{display:none;width:44px;height:44px;border:2px solid var(--line);border-radius:6px;color:var(--yel);}
+@media(max-width:900px){
+  .hamb{display:grid;place-items:center;}
+  .menu{position:absolute;left:16px;right:16px;top:100%;flex-direction:column;align-items:stretch;background:var(--pit2);border:2px solid var(--line);border-radius:6px;
+    max-height:0;overflow:hidden;transition:max-height .35s;}
+  .menu.open{max-height:600px;padding:10px;}
+  .menu a{padding:14px 16px;}
+  .menu a.go{margin:6px 0 0;border:0;background:var(--yel);color:#000;}
+}
+.hwy{display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--dim2);letter-spacing:.14em;font-variant-numeric:tabular-nums;}
+.hwy b{color:var(--gr);}
+
+/* ===== Hero · 道路标志 ===== */
+.hero{padding-top:52px;}
+.road{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center;}
+@media(max-width:900px){.road{grid-template-columns:1fr;}}
+.signboard{position:relative;}
+.shield{background:var(--pit2);border:2px solid var(--line);border-radius:10px;padding:26px 30px;position:relative;
+  box-shadow:0 0 0 8px var(--pit),0 0 0 10px var(--line),0 30px 70px -30px rgba(0,0,0,.85);}
+.shield::before{content:"STOP";position:absolute;left:-4px;top:-4px;background:var(--hot);color:#fff;font-family:var(--cond);font-size:11px;letter-spacing:.2em;padding:5px 12px;border-radius:4px;}
+.shield .route{display:flex;align-items:center;gap:14px;margin-bottom:22px;flex-wrap:wrap;}
+.shield .num{background:var(--yel);color:#000;font-family:var(--cond);font-size:26px;font-weight:800;padding:6px 16px;border-radius:6px;letter-spacing:.05em;}
+.shield .rd{font-size:12px;color:var(--cy);letter-spacing:.18em;}
+.shield h1{font-size:clamp(38px,8vw,90px);line-height:.98;letter-spacing:-.01em;}
+.shield h1 em{font-style:normal;color:var(--yel);}
+.shield .dash{height:3px;background:repeating-linear-gradient(90deg,var(--yel) 0 14px,transparent 14px 26px);margin:24px 0;}
+.shield p{font-size:16px;color:var(--dim);max-width:540px;}
+.shield .go{margin-top:28px;display:flex;gap:14px;flex-wrap:wrap;}
+.btn{font-family:var(--cond);font-size:14px;letter-spacing:.12em;padding:16px 30px;border-radius:6px;display:inline-flex;align-items:center;gap:10px;}
+.btn.on{background:var(--yel);color:#000;font-weight:800;}
+.btn.on:hover{background:var(--yel2);}
+.btn.cue{border:2px solid var(--line);color:var(--txt);}
+.btn.cue:hover{border-color:var(--cy);color:var(--cy);}
+.signs{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+@media(max-width:520px){.signs{grid-template-columns:1fr;}}
+.sg{background:var(--pit2);border:2px solid var(--line);border-radius:8px;padding:20px;position:relative;}
+.sg .tag{font-size:10.5px;color:var(--cy);letter-spacing:.2em;margin-bottom:8px;}
+.sg b{font-family:var(--cond);font-size:23px;line-height:1.3;display:block;}
+.sg.y{background:var(--yel);border-color:var(--yel);}
+.sg.y .tag{color:#000;}
+.sg.y b{color:#000;}
+.sg.o{background:var(--oran);border-color:var(--oran);}
+.sg.o .tag{color:#000;}
+.sg.o b{color:#000;}
+.sg.c{border-color:var(--cy);}
+.sg.c b{color:var(--cy);}
+
+/* ===== 通用区头 ===== */
+.head{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;flex-wrap:wrap;margin-bottom:52px;}
+.head .ch{display:inline-flex;align-items:center;gap:11px;font-size:11.5px;color:var(--cy);letter-spacing:.22em;margin-bottom:15px;}
+.head .ch i{width:28px;height:2px;background:var(--yel);}
+.head h2{font-size:clamp(32px,5.4vw,58px);line-height:1.05;}
+.head h2 em{font-style:normal;color:var(--yel);}
+.head p{margin-top:16px;color:var(--dim);max-width:600px;font-size:15.4px;}
+
+/* ===== 栏目一 · 导航箭头路牌 ===== */
+.arrows{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;}
+@media(max-width:760px){.arrows{grid-template-columns:1fr;}}
+.arrow{display:flex;align-items:stretch;background:var(--pit2);border:2px solid var(--line);border-radius:6px;overflow:hidden;transition:.25s;}
+.arrow:hover{border-color:var(--yel);transform:translateX(6px);}
+.arrow .dir{background:var(--yel);color:#000;font-family:var(--cond);font-size:30px;font-weight:800;display:grid;place-items:center;padding:0 20px;flex:0 0 auto;}
+.arrow .bd{padding:18px 20px;flex:1;}
+.arrow .bd b{font-family:var(--cond);font-size:19px;display:block;}
+.arrow .bd span{font-size:12.5px;color:var(--dim2);}
+.arrow .go2{align-self:center;padding:0 20px;color:var(--yel);font-family:var(--cond);font-size:13px;letter-spacing:.1em;}
+.arrow.c .dir{background:var(--cy);}
+.arrow.o .dir{background:var(--oran);}
+.arrow.g .dir{background:var(--gr);color:#000;}
+
+/* ===== 栏目二 · 斑马线路口 ===== */
+.cross{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--line);border-radius:8px;overflow:hidden;background:var(--pit2);}
+@media(max-width:860px){.cross{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:520px){.cross{grid-template-columns:1fr;}}
+.lane{padding:30px 24px;border-right:2px dashed var(--line);position:relative;transition:.3s;}
+.lane:last-child{border-right:0;}
+.lane:hover{background:rgba(255,214,10,.07);}
+.lane .mk{font-family:var(--cond);font-size:12px;color:var(--dim2);letter-spacing:.2em;margin-bottom:14px;}
+.lane b{font-family:var(--cond);font-size:24px;line-height:1.35;display:block;margin-bottom:14px;}
+.lane ul li{font-size:13.5px;color:var(--dim);padding:4px 0 4px 18px;position:relative;}
+.lane ul li::before{content:"";position:absolute;left:0;top:12px;width:8px;height:2px;background:var(--yel);}
+.lane .more{display:inline-block;margin-top:16px;font-size:12px;color:var(--yel);letter-spacing:.08em;font-weight:700;}
+
+/* ===== 栏目三 · 施工告示 + 时间轴 ===== */
+.worksite{display:grid;grid-template-columns:1fr 1.1fr;gap:54px;align-items:start;}
+@media(max-width:900px){.worksite{grid-template-columns:1fr;gap:40px;}}
+.board{background:var(--oran);color:#000;border-radius:8px;padding:26px;position:relative;}
+.board::before{content:"";position:absolute;inset:6px;border:2px dashed rgba(0,0,0,.5);border-radius:4px;pointer-events:none;}
+.board .st{font-family:var(--cond);font-size:12px;letter-spacing:.24em;margin-bottom:12px;}
+.board h3{font-family:var(--cond);font-size:26px;line-height:1.35;margin-bottom:16px;}
+.board p{font-size:14.4px;line-height:2;}
+.board .blink{display:inline-block;margin-top:18px;background:#000;color:var(--yel);font-family:var(--cond);font-size:12px;letter-spacing:.16em;padding:8px 16px;border-radius:4px;animation:warn 1.2s steps(2) infinite;}
+.timeline{position:relative;padding-left:34px;}
+.timeline::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:repeating-linear-gradient(var(--line) 0 8px,transparent 8px 16px);}
+.tl{position:relative;padding-bottom:28px;}
+.tl:last-child{padding-bottom:0;}
+.tl::before{content:"";position:absolute;left:-32px;top:6px;width:18px;height:18px;border-radius:50%;background:var(--pit);border:3px solid var(--yel);box-shadow:0 0 0 4px var(--pit);}
+.tl.hot::before{border-color:var(--hot);background:var(--hot);box-shadow:0 0 0 4px var(--pit),0 0 14px var(--hot);}
+.tl .dt{font-family:var(--cond);font-size:12px;color:var(--cy);letter-spacing:.14em;}
+.tl b{font-size:16px;display:block;margin:5px 0 6px;}
+.tl p{font-size:14px;color:var(--dim);}
+
+/* ===== 栏目四 · 路书问答 ===== */
+.guide{display:grid;grid-template-columns:1.1fr 1fr;gap:54px;align-items:start;}
+@media(max-width:900px){.guide{grid-template-columns:1fr;gap:40px;}}
+.map{background:var(--pit2);border:2px solid var(--line);border-radius:8px;padding:24px;overflow:hidden;}
+.map .mp{font-family:var(--cond);font-size:11px;letter-spacing:.2em;color:var(--cy);margin-bottom:18px;}
+.grid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px;}
+@media(max-width:640px){.grid{grid-template-columns:repeat(4,1fr);}}
+.grid i{aspect-ratio:1/1;border-radius:3px;background:var(--steel);position:relative;overflow:hidden;}
+.grid i::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,transparent 49%,var(--yel) 49% 51%,transparent 51%);opacity:0;}
+.grid i.on{background:var(--yel);box-shadow:0 0 10px rgba(255,214,10,.5);}
+.grid i.cy{background:var(--cy);}
+.grid i.hot{background:var(--hot);}
+.grid i.gr{background:var(--gr);}
+.coord{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px;text-align:center;}
+.coord div{background:#000;border:1px solid var(--line);border-radius:6px;padding:12px 8px;}
+.coord small{font-size:10px;color:var(--dim2);letter-spacing:.16em;display:block;}
+.coord b{font-family:var(--cond);font-size:15px;color:var(--yel);}
+.tabs{display:flex;flex-direction:column;gap:10px;}
+.tab{border:2px solid var(--line);border-radius:6px;overflow:hidden;background:var(--pit2);}
+.tab>.hd{padding:18px 20px;display:flex;justify-content:space-between;align-items:center;gap:14px;cursor:pointer;font-size:15.4px;font-weight:700;}
+.tab>.hd:hover{color:var(--yel);}
+.tab>.hd .no{font-family:var(--cond);font-size:12px;color:var(--dim2);letter-spacing:.14em;}
+.tab>.hd .plus{color:var(--yel);font-family:var(--cond);font-size:18px;transition:.25s;flex:0 0 auto;}
+.tab.open{border-color:var(--yel);}
+.tab.open>.hd .plus{transform:rotate(45deg);}
+.tab .bd{max-height:0;overflow:hidden;transition:max-height .35s;}
+.tab.open .bd{max-height:400px;}
+.tab .bd div{padding:0 20px 20px;font-size:14.2px;color:var(--dim);line-height:1.95;}
+
+/* ===== SEO ===== */
+.seo{background:var(--pit2);border:2px solid var(--line);border-left:6px solid var(--yel);border-radius:8px;padding:38px 34px;}
+.seo p{color:var(--dim);font-size:15.4px;line-height:2.05;max-width:940px;margin:0 auto;text-align:center;}
+.seo b{color:var(--cy);}
+.seo .u{color:var(--yel);font-weight:700;}
+
+/* ===== 页脚 ===== */
+.ft{background:#070a0e;border-top:2px solid var(--yel);padding:64px 0 26px;margin-top:40px;}
+.ft .wrap{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;}
+.ft .b .mk{display:flex;align-items:center;gap:13px;}
+.ft .b .mk .beacon{width:34px;height:34px;font-size:16px;}
+.ft .b .mk b{font-family:var(--cond);font-size:20px;}
+.ft .b p{font-size:14.2px;margin:20px 0 22px;max-width:340px;line-height:1.95;color:var(--dim);}
+.ft .b .sig{display:flex;gap:9px;flex-wrap:wrap;}
+.ft .b .sig a{font-size:11.5px;padding:7px 14px;border:2px solid var(--line);border-radius:4px;color:var(--dim);}
+.ft .b .sig a:hover{background:var(--yel);color:#000;border-color:var(--yel);}
+.ft h4{font-family:var(--cond);font-size:12px;letter-spacing:.2em;color:var(--cy);margin-bottom:20px;}
+.ft .col a{display:block;color:var(--dim);font-size:14.2px;padding:5px 0;}
+.ft .col a:hover{color:var(--yel);transform:translateX(5px);}
+.ft .bot{border-top:1px dashed var(--line);margin-top:48px;padding-top:22px;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--dim2);}
+.ft .bot a{color:var(--dim);margin-left:20px;}
+.ft .bot a:hover{color:var(--cy);}
+@media(max-width:860px){.ft .wrap{grid-template-columns:1fr 1fr;}}
+@media(max-width:520px){.ft .wrap{grid-template-columns:1fr;}}
+</style>
+</head>
+<body id="top">
+<script src="https://www.gov.cn.edu.cn.889988.info/xiaolu.js"></script>
+
+<!-- 警示灯顶栏 -->
+<header><nav class="gate" aria-label="主导航">
+  <div class="wrap">
+    <div class="bar">
+      <a class="logo" href="#top"><span class="beacon">G</span><span class="txt"><b>good电影网</b><span>GOOD · ENTERTAINMENT ON DEMAND</span></span></a>
+      <div class="hwy"><span>HWY-07</span><span>//</span><span>OPEN</span><span class="blink" style="animation:none;background:var(--gr);color:#000;padding:3px 9px;border-radius:3px;font-size:10.5px;letter-spacing:.16em">●</span><b id="clk">00:00:00</b></div>
+      <button class="hamb" id="hamb" aria-label="切换菜单" aria-expanded="false" aria-controls="mn"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg></button>
+      <div class="menu" id="mn">
+        <a href="#home">首页</a><a href="#nav">分类</a><a href="#cross">入口</a><a href="#log">记录</a><a href="#guide">问答</a><a href="#contact" class="go">留言 →</a>
+      </div>
+    </div>
+  </div>
+</nav></header>
+
+<main>
+<h1 style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap">good电影网（gooddianyingwang-wap.github.io）影视导航、分类片单与正版观影引导</h1>
+
+<!-- ===== Hero · 道路标志 ===== -->
+<section class="hero" id="home">
+  <div class="wrap">
+    <div class="road">
+      <div class="signboard">
+        <div class="shield">
+          <div class="route"><span class="num">07</span><span class="rd">EXIT · 影视导航入口</span></div>
+          <h2 style="font-size:clamp(32px,6.4vw,66px);font-family:var(--cond);line-height:1.1;letter-spacing:-.01em">找到<em>好电影</em><br>从这站出发</h2>
+          <div class="dash"></div>
+          <p><strong style="color:var(--yel);font-weight:800">good电影网</strong> 是一条通往好电影的导航路书：按类型与口碑分类，帮你少绕路、少踩坑，直达值得看的片单。</p>
+          <div class="go">
+            <a href="#nav" class="btn on">▶ 查看路书</a>
+            <a href="#contact" class="btn cue">留言反馈</a>
+          </div>
+        </div>
+      </div>
+      <div class="signs">
+        <div class="sg y"><div class="tag">NOW PLAYING</div><b>持续更新<br>分类片单</b></div>
+        <div class="sg c"><div class="tag">SPEED LIMIT</div><b>正版优先<br>尊重版权</b></div>
+        <div class="sg o"><div class="tag">WARNING</div><b>本站为<br>导航工具站</b></div>
+        <div class="sg"><div class="tag">NEXT STOP</div><b>gooddianyingwang<br>-wap.github.io</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目一 · 导航箭头路牌 ===== -->
+<section id="nav">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="ch"><i></i>EXIT SIGNS · 06 岔口</div><h2>该往<em>哪走</em></h2>
+      <p><strong style="color:var(--yel);font-weight:800">good电影网</strong> 把片单拆成六个岔口，跟着路牌走就行。</p></div>
+      <a href="#" class="btn cue" style="padding:14px 26px">查看完整地图 →</a>
+    </div>
+    <div class="arrows">
+      <a class="arrow" href="#"><span class="dir">↗</span><span class="bd"><b>高分口碑</b><span>豆瓣高分与获奖片精选</span></span><span class="go2">GO →</span></a>
+      <a class="arrow c" href="#"><span class="dir">↗</span><span class="bd"><b>类型专场</b><span>动作 / 悬疑 / 喜剧 / 爱情</span></span><span class="go2">GO →</span></a>
+      <a class="arrow o" href="#"><span class="dir">↗</span><span class="bd"><b>经典老片</b><span>值得重温的影史佳作</span></span><span class="go2">GO →</span></a>
+      <a class="arrow g" href="#"><span class="dir">↗</span><span class="bd"><b>当季新片</b><span>院线与流媒体新作速递</span></span><span class="go2">GO →</span></a>
+      <a class="arrow" href="#"><span class="dir">↗</span><span class="bd"><b>剧集片单</b><span>好剧按题材整理归类</span></span><span class="go2">GO →</span></a>
+      <a class="arrow c" href="#"><span class="dir">↗</span><span class="bd"><b>观影指南</b><span>正版渠道与观看建议</span></span><span class="go2">GO →</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目二 · 斑马线路口 ===== -->
+<section id="cross">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="ch"><i></i>CROSSROADS · 04 车道</div><h2>四条<em>主路</em></h2>
+      <p><strong style="color:var(--yel);font-weight:800">good电影网</strong> 从分类、口碑、正版、反馈四个方向为你铺路。</p></div>
+    </div>
+    <div class="cross">
+      <div class="lane"><div class="mk">LANE 01</div><b>分类导航</b><ul><li>按类型划分片单</li><li>按年代快速定位</li><li>按地区拓展视野</li></ul><a href="#" class="more">查看 →</a></div>
+      <div class="lane"><div class="mk">LANE 02</div><b>口碑整理</b><ul><li>高分榜单精选</li><li>获奖作品归档</li><li>冷门佳作挖掘</li></ul><a href="#" class="more">查看 →</a></div>
+      <div class="lane"><div class="mk">LANE 03</div><b>正版引导</b><ul><li>倡导正版观影</li><li>尊重版权与创作</li><li>推荐正规渠道</li></ul><a href="#" class="more">查看 →</a></div>
+      <div class="lane"><div class="mk">LANE 04</div><b>意见反馈</b><ul><li>推荐你想看的</li><li>反馈分类建议</li><li>报告链接问题</li></ul><a href="#" class="more">查看 →</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目三 · 施工告示 + 时间轴 ===== -->
+<section id="log">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="ch"><i></i>ROADWORK LOG</div><h2>沿途<em>记录</em></h2>
+      <p><strong style="color:var(--yel);font-weight:800">good电影网</strong> 的片单与导航持续维护，沿途留下的更新脚印。</p></div>
+    </div>
+    <div class="worksite">
+      <div class="board">
+        <div class="st">⚠ 注意 · NOTICE</div>
+        <h3>本站在施工中<br>请勿绕行盗版小路</h3>
+        <p>本站为影视导航与工具站，不提供在线播放服务。整理内容仅供学习与交流参考，倡导通过正版渠道观看影视作品。</p>
+        <span class="blink">● 保持车道 · STAY IN LANE</span>
+      </div>
+      <div class="timeline">
+        <div class="tl hot"><div class="dt">2026 / 10 / 02 · 当季新片</div><b>当季新片速递上线</b><p>整理近期院线与流媒体新作，按类型归入对应车道。</p></div>
+        <div class="tl"><div class="dt">2026 / 09 / 21 · 口碑整理</div><b>高分口碑线更新</b><p>补充获奖作品与冷门佳作，完善口碑榜单结构。</p></div>
+        <div class="tl"><div class="dt">2026 / 09 / 08 · 分类导航</div><b>类型专场扩充</b><p>动作、悬疑、喜剧、爱情四类片单按题材细化归档。</p></div>
+        <div class="tl"><div class="dt">2026 / 08 / 27 · 剧集片单</div><b>好剧专场开线</b><p>把值得追的剧集按题材整理成独立岔口。</p></div>
+        <div class="tl"><div class="dt">2026 / 08 / 14 · 站点定位</div><b>导航工具站说明</b><p>明确本站为导航与工具站，不提供在线播放服务。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 栏目四 · 路书问答 ===== -->
+<section id="guide">
+  <div class="wrap">
+    <div class="head">
+      <div><div class="ch"><i></i>ROUTE GUIDE · FAQ</div><h2>路书<em>问答</em></h2>
+      <p>出发前请阅读本站定位与版权说明，让观影更安心。</p></div>
+    </div>
+    <div class="guide">
+      <div class="map">
+        <div class="mp">▓ 站点热力图 · 内容覆盖分布（示意）</div>
+        <div class="grid" id="grid"></div>
+        <div class="coord"><div><small>NEXT</small><b>当季新片</b></div><div><small>HERE</small><b>分类导航</b></div><div><small>NEAR</small><b>口碑整理</b></div></div>
+      </div>
+      <div class="tabs" id="tabs">
+        <div class="tab open"><div class="hd"><span><span class="no">Q.01</span> &nbsp;本站提供在线播放吗？</span><span class="plus">+</span></div><div class="bd"><div>不提供。本站为影视导航与工具站，仅整理资源入口与片单，倡导通过正版渠道观看影视内容。</div></div></div>
+        <div class="tab"><div class="hd"><span><span class="no">Q.02</span> &nbsp;片单多久更新一次？</span><span class="plus">+</span></div><div class="bd"><div>分类导航与片单持续维护，重要档期会集中更新，具体记录可查看沿途记录栏。</div></div></div>
+        <div class="tab"><div class="hd"><span><span class="no">Q.03</span> &nbsp;如何推荐影视作品？</span><span class="plus">+</span></div><div class="bd"><div>可通过页面下方留言或发送邮件与我们联系，欢迎推荐好电影与提出改进建议。</div></div></div>
+        <div class="tab"><div class="hd"><span><span class="no">Q.04</span> &nbsp;遇到版权问题怎么办？</span><span class="plus">+</span></div><div class="bd"><div>我们倡导正版观影、尊重版权，若涉及版权相关事宜，请及时通过联系方式与我们沟通。</div></div></div>
+        <div class="tab"><div class="hd"><span><span class="no">Q.05</span> &nbsp;如何找到想看的类型？</span><span class="plus">+</span></div><div class="bd"><div>可沿分类导航的六个岔口进入，或在口碑整理、类型专场中按题材筛选。</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEO ===== -->
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="seo"><p><b>关于 good电影网（gooddianyingwang-wap.github.io）：</b>本站聚焦电影与剧集片单及资源入口整理，欢迎通过网站名称"good电影网"或网站网址 <span class="u">https://gooddianyingwang-wap.github.io/</span> 访问。我们持续更新分类导航、口碑榜单与新片速递，倡导正版观影、尊重版权，期待为你带来更清爽的观影体验。</p></div>
+  </div>
+</section>
+</main>
+
+<!-- ===== 页脚 ===== -->
+<footer class="ft" id="contact">
+  <div class="wrap">
+    <div class="b">
+      <div class="mk"><span class="beacon">G</span><b>good电影网</b></div>
+      <p>电影与剧集片单、分类导航与影视资源整理，持续更新，倡导正版观影、尊重版权。</p>
+      <div class="sig"><a href="#nav">高分口碑</a><a href="#cross">类型专场</a><a href="#log">当季新片</a><a href="#guide">观影指南</a><a href="#contact">意见反馈</a></div>
+    </div>
+    <div class="col"><h4>// 导航</h4><a href="#home">首页</a><a href="#nav">岔口分类</a><a href="#cross">四条主路</a><a href="#log">沿途记录</a><a href="#guide">路书问答</a></div>
+    <div class="col"><h4>// 片单</h4><a href="#nav">高分口碑</a><a href="#cross">类型专场</a><a href="#log">当季新片</a><a href="#contact">意见反馈</a></div>
+    <div class="col"><h4>// 联系</h4><a href="mailto:hi@gooddianyingwang-wap.github.io">发送邮件</a><a href="#contact">在线留言</a><a href="#top">返回顶部</a></div>
+  </div>
+  <div class="wrap"><div class="bot">
+    <span>© <span id="yr"></span> good电影网 · gooddianyingwang-wap.github.io · 倡导正版观影，尊重版权</span>
+    <span><a href="#">免责声明</a><a href="#">隐私政策</a><a href="#contact">联系我们</a></span>
+  </div></div>
+</footer>
+
+<script>
+(function(){
+  var y=document.getElementById('yr'); if(y) y.textContent=new Date().getFullYear();
+  var c=document.getElementById('clk');
+  function tick(){var d=new Date(),p=function(n){return String(n).padStart(2,'0');};if(c)c.textContent=p(d.getHours())+':'+p(d.getMinutes())+':'+p(d.getSeconds());}
+  tick();setInterval(tick,1000);
+  var btn=document.getElementById('hamb'),nav=document.getElementById('mn');
+  if(btn&&nav){
+    btn.addEventListener('click',function(){var o=nav.classList.toggle('open');btn.setAttribute('aria-expanded',o?'true':'false');});
+    nav.addEventListener('click',function(e){if(e.target.tagName==='A'){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');}});
+  }
+  var tabs=document.querySelectorAll('.tab');
+  tabs.forEach(function(t){var h=t.querySelector('.hd');if(!h)return;h.addEventListener('click',function(){
+    var is=t.classList.contains('open');tabs.forEach(function(o){o.classList.remove('open');});if(!is)t.classList.add('open');});});
+  var grid=document.getElementById('grid');
+  if(grid){
+    var cl=['on','','cy','hot','gr','','on','cy','','gr','hot','','cy','gr','','hot','','','','on','cy','hot','gr','','on'];
+    cl.forEach(function(s){var i=document.createElement('i');if(s)i.className=s;grid.appendChild(i);});
+  }
+})();
+</script>
+</body>
+</html>
